@@ -93,7 +93,7 @@ questions:
     description: "The git repo of the static site"
     label: "The Git Repo of the Static Site"  
   - variable: cloneStaticSiteFromGit.branch
-    default: matser
+    default: master
     type: string
     description: "The branch of the git repo"
     label: "The Branch  of the Git repo"
