@@ -52,7 +52,7 @@ questions:
   show_if: "service.type=LoadBalancer"
   label: LoadBalancer IP of Nginx Service
   group: "Services and Load Balancing"
-- variable: ingress.enabeld
+- variable: ingress.enabled
   default: false
   description: "Expose app using Layer 7 Load Balancer - ingress"
   label: Expose app using Layer 7 Load Balancer - ingress
@@ -60,7 +60,7 @@ questions:
   show_subquestion_if: true
   group: "Services and Load Balancing"
   subquestions:
-  - variable: ingress.hostname
+  - variable: ingress.hosts[0].name
     default: nginx.local
     description: "Hostname to your nginx installation"
     type: hostname
