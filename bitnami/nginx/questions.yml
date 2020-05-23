@@ -24,7 +24,7 @@ questions:
   description: "Clone static site from git"
   label: Clone Static Site From Git
   type: boolean
-  show_subquesion_if: true
+  show_subquestion_if: true
   group: "Copy Static Site From Git"
   subquestions:
   - variable: cloneStaticSiteFromGit.image.repository
@@ -57,7 +57,7 @@ questions:
   description: "Start a side-car prometheus exporter"
   label: Metrics
   type: boolean
-  show_subquesion_if: true
+  show_subquestion_if: true
   group: "Metrics Setting"
   subquestions:
   - variable: metrics.image.repository
@@ -85,7 +85,7 @@ questions:
     type: boolean
     description: "Bitnami metrics serviceMonitor"
     label: Bitnami Metrics ServiceMonitor
-    show_subquesion_if: true
+    show_subquestion_if: true
     group: "Metrics Service Monitor Setting"
     subquestions:
     - variable: metrics.serviceMonitor.namespace
