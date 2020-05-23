@@ -1,0 +1,102 @@
+categories:
+- Nginx
+questions:
+- variable: defaultImage
+  default: true
+  description: "Use default Docker images"
+  label: Use Default Images
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  - variable: image.repository
+    default: "bitnami/nginx"
+    description: "Bitnami nginx image name"
+    type: string
+    label: Bitnami Nginx Image Name
+  - variable: image.tag
+    default: "1.17.10-debian-10-r46"
+    description: "Bitnami nginx image tag"
+    type: string
+    label: Bitnami Nginx Image Tag
+- variable: cloneStaticSiteFromGit.enabled
+  default: false
+  description: "Clone static site from git"
+  label: Clone Static Site From Git
+  type: boolean
+  show_subquesion_if: true
+  group: "Copy Static Site From Git"
+  subquestions:
+  - variable: cloneStaticSiteFromGit.image.repository
+    default: bitnami/git
+    type: string
+    description: "Bitnami git image name"
+    label: Bitnami Git Image Name
+  - variable: cloneStaticSiteFromGit.image.tag
+    default: 2.26.2-debian-10-r30
+    type: string
+    description: "Bitnami git image tag"
+    label: Bitnami Git Image Tag
+  - variable: cloneStaticSiteFromGit.repository
+    default: https://github.com/lushatech.git
+    type: string
+    description: "The git repo of the static site"
+    label: "The Git Repo of the Static Site"  
+  - variable: cloneStaticSiteFromGit.branch
+    default: matser
+    type: string
+    description: "The branch of the git repo"
+    label: "The Branch  of the Git repo"
+  - variable: cloneStaticSiteFromGit.interval
+    default: 60
+    type: string
+    description: "Interval for sidecar container pull from the repository"
+    label: "The Interval pull from github repo "
+- variable: metrics.enabled
+  default: false
+  description: "Start a side-car prometheus exporter"
+  label: Metrics
+  type: boolean
+  show_subquesion_if: true
+  group: "Metrics Setting"
+  subquestions:
+  - variable: metrics.image.repository
+    default: bitnami/nginx-exporter
+    type: string
+    description: "Bitnami metrics image name"
+    label: Bitnami Metrics Image Name
+  - variable: metrics.image.tag
+    default: {TAG_NAME}
+    type: string
+    description: "Bitnami metrics image tag"
+    label: Bitnami Metrics Image Tag
+  - variable: metrics.podAnnotations
+    default: {prometheus.io/scrape: "true", prometheus.io/port: "9113"}
+    type: string
+    description: "Bitnami metrics podAnnotations"
+    label: Bitnami Metrics podAnnotations
+  - variable: metrics.resources
+    default: {}
+    type: string
+    description: "Bitnami metrics resources"
+    label: Bitnami Metrics Resources
+  - variable: metrics.serviceMonitor.enabled
+    default: false
+    type: boolean
+    description: "Bitnami metrics serviceMonitor"
+    label: Bitnami Metrics ServiceMonitor
+    show_subquesion_if: true
+    group: "Metrics Service Monitor Setting"
+    subquestions:
+    - variable: metrics.serviceMonitor.namespace
+      default: 
+      type: string
+      description: "Bitnami metrics serviceMonitor namespace"
+      label: Bitnami Metrics ServiceMonitor Namespace
+        
+  
+ 
+
+    
+
+

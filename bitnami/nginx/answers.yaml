@@ -1,0 +1,5 @@
+defaultImage: true
+registry: docker.io
+image.repository: bitnami/nginx
+image.tag: 1.17.10-debian-10-r46
+
