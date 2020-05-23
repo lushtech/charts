@@ -1,6 +1,8 @@
 categories:
 - Nginx
 questions:
+
+# Image       
 - variable: defaultImage
   default: true
   description: "Use default Docker images"
@@ -65,7 +67,7 @@ questions:
     label: Hostname
     required: true
 
-
+# Clone Static Site
 
 - variable: cloneStaticSiteFromGit.enabled
   default: false
@@ -86,7 +88,7 @@ questions:
     description: "Bitnami git image tag"
     label: Bitnami Git Image Tag
   - variable: cloneStaticSiteFromGit.repository
-    default: https://github.com/lushatech.git
+    default: https://github.com/mdn/beginner-html-site-styled.git
     type: string
     description: "The git repo of the static site"
     label: "The Git Repo of the Static Site"  
@@ -100,6 +102,8 @@ questions:
     type: string
     description: "Interval for sidecar container pull from the repository"
     label: "The Interval pull from github repo "
+
+# Metrics 
 - variable: metrics.enabled
   default: false
   description: "Start a side-car prometheus exporter"
@@ -156,6 +160,8 @@ questions:
     type: string
     description: "Bitnami metrics serviceMonitor selector"
     label: Bitnami Metrics ServiceMonitor Selector
+
+#  Autoscaling    
 - variable: autoscaling.enabled
   default: false
   type: boolean
