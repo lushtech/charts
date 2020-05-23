@@ -60,7 +60,7 @@ questions:
   show_subquestion_if: true
   group: "Services and Load Balancing"
   subquestions:
-  - variable: ingress.hostname[0].name
+  - variable: ingress.hostname
     default: nginx.local
     description: "Hostname to your nginx installation"
     type: hostname
