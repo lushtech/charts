@@ -80,20 +80,70 @@ questions:
     type: string
     description: "Bitnami metrics resources"
     label: Bitnami Metrics Resources
-  - variable: metrics.serviceMonitor.enabled
-    default: false
-    type: boolean
-    description: "Bitnami metrics serviceMonitor"
-    label: Bitnami Metrics ServiceMonitor
-    show_subquestion_if: true
-    group: "Metrics Service Monitor Setting"
-    subquestions:
-    - variable: metrics.serviceMonitor.namespace
-      default: 
-      type: string
-      description: "Bitnami metrics serviceMonitor namespace"
-      label: Bitnami Metrics ServiceMonitor Namespace
+- variable: metrics.serviceMonitor.enabled
+  default: false
+  type: boolean
+  description: "Bitnami metrics serviceMonitor, need Metrics enable"
+  label: Bitnami Metrics ServiceMonitor
+  show_subquestion_if: true
+  group: "Metrics Service Monitor Setting"
+  subquestions:
+  - variable: metrics.serviceMonitor.namespace
+    default: 
+    type: string
+    description: "Bitnami metrics serviceMonitor namespace"
+    label: Bitnami Metrics ServiceMonitor Namespace
+  - variable: metrics.serviceMonitor.interval
+    default:
+    type: string
+    description: "Bitnami metrics serviceMonitor interval"
+    label: Bitnami Metrics ServiceMonitor Interval
+  - variable: metrics.serviceMonitor.scrapeTimeout
+    default:
+    type: string
+    description: "Bitnami metrics serviceMonitor scrapeTimeout"
+    label: Bitnami Metrics ServiceMonitor ScrapeTimeout
+  - variable: metrics.serviceMonitor.selector
+    default:
+    type: string
+    description: "Bitnami metrics serviceMonitor selector"
+    label: Bitnami Metrics ServiceMonitor Selector
+- variable: autoscaling.enabled
+  default: false
+  type: boolean
+  description: "Bitnami nginx autoscale"
+  label: Bitnami Nginx Autoscale
+  show_subquestion_if: true
+  group: "Bitnami Nginx Autoscale Setting"
+  subquestions:
+  - variable: autoscaling.minReplicas
+    default:
+    type: int
+    description: "Bitnami nginx autoscaling minReplicas"
+    label: Bitnami Nginx Autoscaling MinReplicas
+  - variable: autoscaling.maxReplicas
+    default:
+    type: int
+    description: "Bitnami nginx autoscaling maxReplicas"
+    label: Bitnami Nginx Autoscaling MaxReplicas
+  - variable: autoscaling.targetCPU
+    default:
+    type: string
+    description: "Bitnami nginx autoscaling targetCPU"
+    label: Bitnami Nginx Autoscaling TargetCPU
+  - variable: autoscaling.targetMemory
+    default:
+    type: string
+    description: "Bitnami nginx autoscaling targetMemory"
+    label: Bitnami Nginx Autoscaling TargetMemory
+  
+
         
+
+
+  
+
+       
   
  
 
