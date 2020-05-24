@@ -62,10 +62,17 @@ questions:
   subquestions:
   - variable: ingress.hosts[0].name
     default: nginx.local
-    description: "Hostname to your nginx installation"
+    description: "Domain"
     type: hostname
     label: Hostname
     required: true
+  - variable: ingress.hostname
+    default: ""
+    description: "Hostname to your nginx installation"
+    type: hostname
+    label: Hostname
+    
+  
 
 # Clone Static Site
 
