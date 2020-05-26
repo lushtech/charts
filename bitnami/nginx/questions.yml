@@ -66,11 +66,6 @@ questions:
     type: hostname
     label: Hostname
     required: true
-  - variable: ingress.hostname
-    default: nginx.local
-    description: "Hostname to your nginx installation"
-    type: hostname
-    label: Hostname
     
   
 
