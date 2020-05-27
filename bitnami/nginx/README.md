@@ -245,3 +245,7 @@ Use the workaround below to upgrade from versions previous to 1.0.0. The followi
 ```console
 $ kubectl patch deployment nginx --type=json -p='[{"op": "remove", "path": "/spec/selector/matchLabels/chart"}]'
 ```
+
+# 分析
+
+value.yaml显示定义了tls默认值，如果不想在ingress上开启tls，应该在question.yml显示定义tls为空。

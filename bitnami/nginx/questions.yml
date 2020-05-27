@@ -66,7 +66,19 @@ questions:
     type: hostname
     label: Hostname
     required: true
+  - variable: ingress.tls[0].hosts[0]
+    default: ""
+    description: "Ingress tls host name"
+    type: string
+    label: Ingress tls host name
+  - variable: ingress.tls[0].secretName
+    default: ""
+    description: "Ingress tls secret name"
+    type: string
+    label: Ingress tls secret name
+  
     
+
   
 
 # Clone Static Site
