@@ -34,7 +34,6 @@ questions:
   description: "Nginx custom config block,A piece of code"
   label: Nginx custom config serverBlock
   type: string
-  show_if: "existingServerBlockConfigmap="""
   group: "Nginx Custom Config"
   
 # Services and Load Balancing
