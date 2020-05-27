@@ -86,7 +86,58 @@ questions:
     label: Ingress tls enable
   
     
-
+# LDAP Config
+- variable: ldapDaemon.enabled
+  default: false
+  description: "LDAP config"
+  group: "LDAP CONFIG"
+  type: boolean
+  required: true
+  label: LDAP CONFIG
+  show_subquestion_if: true
+  subquestions:
+  - variable: ldapDaemon.ldapConfig.uri
+    default: ""
+    description: "LDAP URI where to query the server"
+    type: string
+    label: LDAP URI 
+  - variable: ldapDaemon.ldapConfig.baseDN
+    default: ""
+    description: "LDAP search base DN"
+    type: string
+    label: LDAP search base DN
+  - variable: ldapDaemon.ldapConfig.bindDN
+    default: ""
+    description: "LDAP bind DN"
+    type: string
+    label: LDAP bind DN
+  - variable: ldapDaemon.ldapConfig.bindPassword
+    default: ""
+    description: "LDAP bind bindPassword"
+    type: string
+    label: LDAP bind bindPassword
+  - variable: ldapDaemon.ldapConfig.filter
+    default: ""
+    description: "LDAP search filter"
+    type: string
+    label: LDAP search filter
+  - variable: ldapDaemon.ldapConfig.httpRealm
+    default: ""
+    description: "LDAP auth realm"
+    type: string
+    label: LDAP auth realm
+  - variable: ldapDaemon.ldapConfig.httpCookieName
+    default: ""
+    description: "LDAP cookie name"
+    type: string
+    label: LDAP cookie name 
+  
+  
+  
+  
+  
+  
+  
   
 
 # Clone Static Site

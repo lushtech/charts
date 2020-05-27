@@ -287,7 +287,22 @@ templates/**server-block-configmap.yaml**是专门用来定义nginx的配置文�
   existingServerBlockConfigmap:  nginxserverconfig
   ```
 
+  注意：创建cinfigmap的时候，data里key名为：server-block.conf，否则挂在不上。
+
+  ​             并且，方法二的配置会覆盖方法一的配置。
+
   
+
+  
+
+## 如何使用LDAP
+
+  LDAP是访问控制。因为有些场景，需要经过授权才可以访问网站。
+
+* 设置ldapDaemon.enabled为ture
+* 使用配置文件
+  在value.yml文件中的dapDaemon.nginxServerBlock，或者使用外部的配置文件ldapDaemon.existingNginxServerBlockSecret
+* 在value.yml文件中完成 LDAP Server connection details配置细节，或者使用ldapDaemon.ldapConfig来声明。
 
   
 
