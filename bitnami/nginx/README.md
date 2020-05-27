@@ -248,4 +248,32 @@ $ kubectl patch deployment nginx --type=json -p='[{"op": "remove", "path": "/spe
 
 # 分析
 
-value.yaml显示定义了tls默认值，如果不想在ingress上开启tls，应该在question.yml显示定义tls为空。
+## 如何传给nginx容器配置
+
+* 方法一  配置serverBlock变量
+  例如在questions.yml中定义变量serverBlock
+
+  ```
+  serverBlock: |-
+    server {
+      listen 0.0.0.0:8080;
+      location / {
+        return 200 "hello!";
+      }
+    }
+  ```
+
+  
+
+  
+
+* 方法二 配置configmap
+
+  
+
+## 难点
+
+* Ingress默认开启tls，导致重定向过多，不能正常打开网页。
+
+value.yaml显式定义了tls默认值，默认ingress上开启tls，如果没有tls证书，就会报错。所以，如果不使用tls，就应该在question.yml显示定义tls为关闭。
+

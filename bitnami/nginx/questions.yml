@@ -21,6 +21,13 @@ questions:
     description: "Bitnami nginx image tag"
     type: string
     label: Bitnami Nginx Image Tag
+# Nginx custom config
+- variable: serverBlock
+  default: ""
+  description: "Nginx custom config block"
+  label: Nginx custom config serverBlock
+  type: string
+  group: "Nginx custom config"
 
     
 # Services and Load Balancing
