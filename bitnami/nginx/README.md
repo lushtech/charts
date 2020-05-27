@@ -250,6 +250,12 @@ $ kubectl patch deployment nginx --type=json -p='[{"op": "remove", "path": "/spe
 
 ## 如何传给nginx容器配置
 
+templates/**server-block-configmap.yaml**是专门用来定义nginx的配置文件。配置文件定义data数据，包含server-blocks-paths.conf：去相关路径中include配置文件，server-block.conf，用serverBlock变量定义的配置。
+
+可以在serverBlock变量中定义，也可以事先实现定义一个configmap，其名字存入existingServerBlockConfigmap变量。
+
+
+
 * 方法一  配置serverBlock变量
   例如在questions.yml中定义变量serverBlock
 
@@ -257,17 +263,33 @@ $ kubectl patch deployment nginx --type=json -p='[{"op": "remove", "path": "/spe
   serverBlock: |-
     server {
       listen 0.0.0.0:8080;
-      location / {
+      location /hello {
         return 200 "hello!";
       }
+      location / {
+        root /app;
+      }
     }
+    
+  ```
+
+  注意，在rancher应用商店通过UI部署时，填写serverBlock字段的值时，`|-`要去掉。否则nginx容器报错不认识此标识符。
+
+  
+
+* 方法二 配置configmap
+
+  假定设置了一个configmap名字为nginxserverconfig
+
+  在value.yml或者questions.yml中配置：
+
+  ```
+  existingServerBlockConfigmap:  nginxserverconfig
   ```
 
   
 
   
-
-* 方法二 配置configmap
 
   
 

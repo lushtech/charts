@@ -22,13 +22,23 @@ questions:
     type: string
     label: Bitnami Nginx Image Tag
 # Nginx custom config
-- variable: serverBlock
-  default: ""
-  description: "Nginx custom config block"
-  label: Nginx custom config serverBlock
-  type: string
+- variable: myNginxConfig
+  default: false
+  description: "use Nginx custom config or not"
+  label: Use Custom Nginx Config 
+  type: boolean
   group: "Nginx custom config"
-
+  show_subquestion_if: true
+  - variable: serverBlock
+    default: ""
+    description: "Nginx custom config block,A piece of code"
+    label: Nginx custom config serverBlock
+    type: string
+  - variable: existingServerBlockConfigmap
+    default: ""
+    description: "Name of existing PVC with custom NGINX server block"
+    label: Configmap Name
+    type: string
     
 # Services and Load Balancing
 - variable: service.type
