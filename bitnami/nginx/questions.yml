@@ -203,10 +203,8 @@ questions:
     description: "Bitnami metrics image tag"
     label: Bitnami Metrics Image Tag
   - variable: metrics.podAnnotations
-    default: | 
-         prometheus.io/scrape: "true"
-         prometheus.io/port: "9113"
-    type: multiline
+    default: {prometheus.io/scrape: "true", prometheus.io/port: "9113"}
+    type: string
     description: "Bitnami metrics podAnnotations"
     label: Bitnami Metrics podAnnotations
   - variable: metrics.resources
