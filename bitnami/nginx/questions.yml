@@ -191,13 +191,15 @@ questions:
     description: "Bitnami metrics image name"
     label: Bitnami Metrics Image Name
   - variable: metrics.image.tag
-    default: {TAG_NAME}
+    default: 0.7.0-debian-10-r32
     type: string
     description: "Bitnami metrics image tag"
     label: Bitnami Metrics Image Tag
   - variable: metrics.podAnnotations
-    default: {prometheus.io/scrape: "true", prometheus.io/port: "9113"}
-    type: string
+    default: | 
+         prometheus.io/scrape: "true"
+         prometheus.io/port: "9113"
+    type: multiline
     description: "Bitnami metrics podAnnotations"
     label: Bitnami Metrics podAnnotations
   - variable: metrics.resources

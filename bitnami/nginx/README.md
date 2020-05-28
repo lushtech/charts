@@ -287,7 +287,7 @@ templates/**server-block-configmap.yaml**是专门用来定义nginx的配置文�
   existingServerBlockConfigmap:  nginxserverconfig
   ```
 
-  注意：创建cinfigmap的时候，data里key名为：server-block.conf，否则挂在不上。
+  注意：创建cinfigmap的时候，data里key名为：server-block.conf，否则挂载不上。
 
   ​             并且，方法二的配置会覆盖方法一的配置。
 
@@ -299,12 +299,36 @@ templates/**server-block-configmap.yaml**是专门用来定义nginx的配置文�
 
   LDAP是访问控制。因为有些场景，需要经过授权才可以访问网站。
 
+“LDAP的英文全称是Lightweight Directory Access Protocol，了解LDAP可以参考此文
+[LDAP入门](https://www.jianshu.com/p/7e4d99f6baaf)
+
+`dn:cn=honglv,ou=bei,ou=xi,ou=dong,dc=ljheee`
+其中dn标识一条记录，描述了一条数据的详细路径。
+咦!有人疑问，为什么ou会有多个值？你想想，从树根到达苹果的位置，可能要经过好几个树杈，所有ou可能有多个值。关于dn后面一长串，分别是cn，ou,dc；中间用逗号隔开。
+
+```
+总结一下LDAP树形数据库如下：
+dn ：一条记录的详细位置
+dc ：一条记录所属区域    (哪一颗树)
+ou ：一条记录所属组织    （哪一个分支）
+cn/uid：一条记录的名字/ID   (哪一个苹果名字)
+LDAP目录树的最顶部就是根，也就是所谓的“基准DN"。
+```
+
+而且需要先部署一个LDAP-sever。
+
+
+
+### 在本chart里如何设置
+
 * 设置ldapDaemon.enabled为ture
 * 使用配置文件
   在value.yml文件中的dapDaemon.nginxServerBlock，或者使用外部的配置文件ldapDaemon.existingNginxServerBlockSecret
 * 在value.yml文件中完成 LDAP Server connection details配置细节，或者使用ldapDaemon.ldapConfig来声明。
 
-  
+​       
+
+
 
   
 
