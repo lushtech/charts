@@ -23,18 +23,25 @@ questions:
     label: Bitnami Nginx Image Tag
 
 # Nginx custom config
-- variable: existingServerBlockConfigmap
-  default: ""
-  description: "Name of existing PVC with custom NGINX server block"
-  label: Configmap Name
-  type: string
-  group: "Nginx Custom Config"
-- variable: serverBlock
-  default: ""
-  description: "Nginx custom config block,A piece of code"
-  label: Nginx custom config serverBlock
-  type: string
-  group: "Nginx Custom Config"
+
+- variable: MyVariableUseCustomCongig
+  default: false
+  description: "Use custom congig"
+  label: Use Custom Config
+  type: boolean
+  show_subquestion_if: true
+  group: "NGINX CUSTOM CONFIG"
+  subquestions:
+  - variable: existingServerBlockConfigmap
+    default: ""
+    description: "Name of existing PVC with custom NGINX server block"
+    label: Configmap Name
+    type: string
+  - variable: serverBlock
+    default: ""
+    description: "Nginx custom config block,A piece of code"
+    label: Nginx custom config serverBlock
+    type: string
   
 # Services and Load Balancing
 - variable: service.type
