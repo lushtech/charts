@@ -2,16 +2,16 @@ dependencies:
 - name: mysql
   version: "0.19.2"
   appVersion: 5.7.14
-  repository: "@stable"
+  repository: "file://charts"
 - name: redis
-  repository: "@stable"
+  repository: "file://charts"
   appVersion: "4.0.14"
   version: "6.4.5"
 - name: rabbitmq
-  repository: "@stable"
+  repository: "file://charts"
   appVersion: "3.7.14"
   version: "5.5.0"
 - name: elasticsearch
-  repository: "https://helm.elastic.co"
+  repository: "file://charts"
   appVersion: "6.5.0"
   version: "6.5.0"
