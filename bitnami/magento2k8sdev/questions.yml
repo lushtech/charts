@@ -1,0 +1,114 @@
+categories:
+- E-commerce
+questions:
+# php image
+- variable: image.repository
+  default: "shiftedreality/magento-kubernetes-components-php"
+  description: "Use default Docker images"
+  label: Use Default Images
+  type: string
+  group: "Php-fpm Container Images"
+  subquestions:
+  - variable: image.tag
+    default: "7.1-fpm"
+    description: "Php-fpm version"
+    type: string
+    label: Php-fpm Version
+  - variable: image.pullPolicy
+    default: "IfNotPresent"
+    description: "pullPolicy"
+    type: string
+    label: pullPolicy
+
+# xdebugService  
+- variable: xdebugService.type
+  default: "NodePort"
+  description: "xdebugService"
+  label: xdebugService
+  type: string
+  group: "xdebugService"
+  subquestions:
+  - variable: xdebugService.port
+    default: "8001"
+    description: "port"
+    type: string
+    label: port
+  - variable:  xdebugService.nodePort
+    default: "30302"
+    description: "nodePort"
+    type: string
+    label: nodePort
+
+# monolith images
+- variable: monolith.name
+  default: "magento2"
+  description: "monolith name"
+  label: MONOLITH NAME
+  type: string
+  group: "Monolith images"
+  subquestions:
+  - variable: monolith.deployment.nginxImage
+    default: "nginx:1.9"
+    description: "nginx image"
+    type: string
+    label: Nginx Image
+  - variable: monolith.deployment.codeImage 
+    default: "shiftedreality/magento-kubernetes-components-php"
+    description: "codeImage"
+    type: string
+    label: Code Image
+  - variable: monolith.deployment.imageTag
+    default: "7.1-fpm"
+    description: "Image tag"
+    type: string
+    label: Image Tag
+  - variable: monolith.deployment.imagePullPolicy
+    default: "Always"
+    description: "imagePullPolicy"
+    type: string
+    label: Image Pull Policy
+
+# Global Varnish
+- variable: global.caching.varnish.enabled
+  default: true
+  description: "varnish.enabled"
+  label: varnish.enabled
+  type: boolean
+  group: "Global Varnish"
+
+# Global Monolith
+- variable: global.monolith.service.port
+  default: 8050
+  description: "port"
+  label: Port
+  type: string
+  group: "Global Monolith"
+- variable: global.monolith.service.nginxPort
+  default: 8001
+  description: "nginxport"
+  label: Nginx Port
+  type: string
+  group: "Global Monolith"
+- variable: global.monolith.service.phpFpmPort
+  default: 9001
+  description: "phpfpm port"
+  label: Php Fpm Port
+  type: string
+  group: "Global Monolith"
+- variable: global.monolith.service.phpFpmXdebugPort
+  default: 9002
+  description: "phpfpmxdebugport"
+  label: Php Fpm Xdebug Port
+  type: string
+  group: "Global Monolith"
+- variable: global.monolith.service.varnishPort
+  default: 6081
+  description: "varnish port"
+  label: Varnish Port
+  type: string
+  group: "Global Monolith"  
+
+  
+  
+
+
