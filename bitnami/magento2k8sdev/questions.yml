@@ -219,62 +219,7 @@ questions:
   type: string
   group: "Rabbitmq"
   
-# elasticsearch
-- variable: elasticsearch.antiAffinity
-  default: "soft"
-  description: "elasticsearch.antiAffinity"
-  label: Elasticsearch AntiAffinity
-  type: string
-  group: "Elasticsearch"
-- variable: elasticsearch.esJavaOpts
-  default: "-Xmx128m -Xms128m"
-  description: "elasticsearch.esJavaOpts"
-  label: Elasticsearch esJavaOpts
-  type: string
-  group: "Elasticsearch"
-- variable: elasticsearch.resources.requests.cpu
-  default: "100m"
-  description: "elasticsearch.resources.requests.cpu"
-  label: Elasticsearch Resources Requests Cpu
-  type: string
-  group: "Elasticsearch"
-- variable: elasticsearch.resources.requests.memory
-  default: "512M"
-  description: "elasticsearch.resources.requests.memory"
-  label: Elasticsearch Resources Requests Memory
-  type: string
-  group: "Elasticsearch"  
-- variable: elasticsearch.resources.limits.cpu
-  default: "1000m"
-  description: "elasticsearch.resources.limits.cpu"
-  label: Elasticsearch Resources limits cpu
-  type: string
-  group: "Elasticsearch"
-- variable: elasticsearch.resources.limits.memory
-  default: "512M"
-  description: "elasticsearch.resources.limits.memory"
-  label: Elasticsearch Resources limits memory
-  type: string
-  group: "Elasticsearch"  
-- variable: elasticsearch.volumeClaimTemplate.accessModes
-  default: "ReadWriteOnce"
-  description: "elasticsearch.volumeClaimTemplate.accessModes"
-  label: Elasticsearch VolumeClaimTemplate AccessModes
-  type: string
-  group: "Elasticsearch"
-- variable: elasticsearch.volumeClaimTemplate.storageClassName
-  default: ""
-  description: "elasticsearch.volumeClaimTemplate.storageClassName"
-  label: Elasticsearch VolumeClaimTemplate storageClassName
-  type: storageclass
-  group: "Elasticsearch"
-- variable: elasticsearch.volumeClaimTemplate.resources.requests.storage
-  default: "100M"
-  description: "elasticsearch.volumeClaimTemplate.resources.requests.storage"
-  label: Elasticsearch VolumeClaimTemplate Resources Requests Storage 
-  type: string
-  group: "Elasticsearch"
-  
+
 
 
 
