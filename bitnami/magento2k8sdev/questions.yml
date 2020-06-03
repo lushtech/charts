@@ -7,6 +7,7 @@ questions:
   label: Use Default Images
   type: string
   group: "Php-fpm Container Images"
+  show_subquestion_if: true
   subquestions:
   - variable: image.tag
     default: "7.1-fpm"
