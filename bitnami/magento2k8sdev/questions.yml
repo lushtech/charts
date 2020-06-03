@@ -1,7 +1,6 @@
 categories:
 - E-commerce
 questions:
-# php image
 - variable: image.repository
   default: "shiftedreality/magento-kubernetes-components-php"
   description: "Use default Docker images"
