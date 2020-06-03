@@ -130,6 +130,7 @@ questions:
   type: boolean
   group: "Global Persistence"
   show_subquestion_if: true
+  subquestions:
   - variable: global.persistence.nfs.serverIp
     default: "192.168.99.1"
     description: "Server Ip"
