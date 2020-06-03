@@ -180,7 +180,7 @@ questions:
   type: boolean
   group: "Redis"
 - variable: redis.master.disableCommands
-  default: []
+  default: "[]"
   description: "redis.master.disableCommands"
   label: Redis Master Disable Commands
   type: string
@@ -257,7 +257,7 @@ questions:
   type: string
   group: "Elasticsearch"  
 - variable: elasticsearch.volumeClaimTemplate.accessModes
-  default: [ "ReadWriteOnce" ]
+  default: "ReadWriteOnce"
   description: "elasticsearch.volumeClaimTemplate.accessModes"
   label: Elasticsearch VolumeClaimTemplate AccessModes
   type: string
