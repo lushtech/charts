@@ -107,6 +107,184 @@ questions:
   label: Varnish Port
   type: string
   group: "Global Monolith"  
+- variable: global.monolith.mysqlHost
+  default: magento-mysql
+  description: "mysqlHost"
+  label: Mysql Host
+  type: string
+  group: "Global Monolith"
+- variable: global.monolith.volumeHostPath
+  default: "/Users/user/Projects/magento2-kubernetes-for-developers"
+  description: "volumeHostPath"
+  label: Volume HostPath
+  type: string
+  group: "Global Monolith"  
+# Global persistence
+- variable: global.persistence.nfs.enabled
+  default: true
+  description: "nfs.enabled"
+  label: Nfs Enabled
+  type: boolean
+  group: "Global Persistence"
+  show_subquestion_if: true
+  - variable: global.persistence.nfs.serverIp
+    default: "192.168.99.1"
+    description: "Server Ip"
+    label: Server Ip
+    type: string
+
+# Mysql
+- variable: mysql.fullname
+  default: "magento-mysql"
+  description: "Mysql Name"
+  label: Mysql Fullname
+  type: string
+  group: "Mysql"
+- variable: mysql.mysqlRootPassword
+  default: "123123q"
+  description: "Mysql RootPassword"
+  label: Mysql Root Password
+  type: string
+  group: "Mysql"
+- variable: mysql.service.type
+  default: "NodePort"
+  description: "mysql.service.type"
+  label: Mysql Service Type
+  type: string
+  group: "Mysql"
+- variable: mysql.service.nodeport
+  default: "30306"
+  description: "mysql.service.nodeport"
+  label: Mysql Service Nodeport
+  type: string
+  group: "Mysql"
+- variable: mysql.persistence.size
+  default: "4Gi"
+  description: "mysql.persistence.size"
+  label: Mysql Persistence Size
+  type: string
+  group: "Mysql"  
+- variable: mysql.imageTag
+  default: "5.7.22"
+  description: "mysql imageTag"
+  label: Mysql imageTag
+  type: string
+  group: "Mysql"
+
+# redis
+
+- variable: redis.usePassword
+  default: false
+  description: "redis.usePassword"
+  label: Redis usePassword
+  type: boolean
+  group: "Redis"
+- variable: redis.master.disableCommands
+  default: []
+  description: "redis.master.disableCommands"
+  label: Redis Master Disable Commands
+  type: string
+  group: "Redis"
+- variable: redis.master.persistence.enabled
+  default: false
+  description: "redis.master.persistence.enabled"
+  label: Redis Master Persistence Enable
+  type: boolean
+  group: "Redis"
+- variable: redis.cluster.enabled
+  default: false
+  description: "redis.cluster.enabled"
+  label: Redis Cluster Enable
+  type: boolean
+  group: "Redis"
+  
+# rabbitmq
+
+- variable: rabbitmq.service.type
+  default: "NodePort"
+  description: "rabbitmq.service.type"
+  label: Rabbitmq Service Type
+  type: string
+  group: "Rabbitmq"
+- variable: rabbitmq.rabbitmq.username
+  default: "admin"
+  description: "rabbitmq.rabbitmq.username"
+  label: Rabbitmq Rabbitmq Username
+  type: string
+  group: "Rabbitmq"
+- variable: rabbitmq.rabbitmq.password
+  default: "123123q"
+  description: "rabbitmq.rabbitmq.password"
+  label: Rabbitmq Rabbitmq Password
+  type: string
+  group: "Rabbitmq"
+  
+# elasticsearch
+- variable: elasticsearch.antiAffinity
+  default: "soft"
+  description: "elasticsearch.antiAffinity"
+  label: Elasticsearch AntiAffinity
+  type: string
+  group: "Elasticsearch"
+- variable: elasticsearch.esJavaOpts
+  default: "-Xmx128m -Xms128m"
+  description: "elasticsearch.esJavaOpts"
+  label: Elasticsearch esJavaOpts
+  type: string
+  group: "Elasticsearch"
+- variable: elasticsearch.resources.requests.cpu
+  default: "100m"
+  description: "elasticsearch.resources.requests.cpu"
+  label: Elasticsearch Resources Requests Cpu
+  type: string
+  group: "Elasticsearch"
+- variable: elasticsearch.resources.requests.memory
+  default: "512M"
+  description: "elasticsearch.resources.requests.memory"
+  label: Elasticsearch Resources Requests Memory
+  type: string
+  group: "Elasticsearch"  
+- variable: elasticsearch.resources.limits.cpu
+  default: "1000m"
+  description: "elasticsearch.resources.limits.cpu"
+  label: Elasticsearch Resources limits cpu
+  type: string
+  group: "Elasticsearch"
+- variable: elasticsearch.resources.limits.memory
+  default: "512M"
+  description: "elasticsearch.resources.limits.memory"
+  label: Elasticsearch Resources limits memory
+  type: string
+  group: "Elasticsearch"  
+- variable: elasticsearch.volumeClaimTemplate.accessModes
+  default: [ "ReadWriteOnce" ]
+  description: "elasticsearch.volumeClaimTemplate.accessModes"
+  label: Elasticsearch VolumeClaimTemplate AccessModes
+  type: string
+  group: "Elasticsearch"
+- variable: elasticsearch.volumeClaimTemplate.storageClassName
+  default: ""
+  description: "elasticsearch.volumeClaimTemplate.storageClassName"
+  label: Elasticsearch VolumeClaimTemplate storageClassName
+  type: storageclass
+  group: "Elasticsearch"
+- variable: elasticsearch.volumeClaimTemplate.resources.requests.storage
+  default: "100M"
+  description: "elasticsearch.volumeClaimTemplate.resources.requests.storage"
+  label: Elasticsearch VolumeClaimTemplate Resources Requests Storage 
+  type: string
+  group: "Elasticsearch"
+  
+
+
+
+
+  
+
+  
+  
+  
+  
 
   
   
