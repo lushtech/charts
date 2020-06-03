@@ -7,18 +7,18 @@ questions:
   label: Use Default Images
   type: string
   group: "Php-fpm Container Images"
-  show_subquestion_if: true
-  subquestions:
-  - variable: image.tag
-    default: "7.1-fpm"
-    description: "Php-fpm version"
-    type: string
-    label: Php-fpm Version
-  - variable: image.pullPolicy
-    default: "IfNotPresent"
-    description: "pullPolicy"
-    type: string
-    label: pullPolicy
+- variable: image.tag
+  default: "7.1-fpm"
+  description: "Php-fpm version"
+  type: string
+  label: Php-fpm Version
+  group: "Php-fpm Container Images"
+- variable: image.pullPolicy
+  default: "IfNotPresent"
+  description: "pullPolicy"
+  type: string
+  label: pullPolicy
+  group: "Php-fpm Container Images"
 
 
 
