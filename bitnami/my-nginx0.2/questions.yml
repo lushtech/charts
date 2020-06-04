@@ -1,0 +1,46 @@
+categories:
+- Nginx
+questions:
+- variable: image.repository
+  default: nginx
+  description: "image.repository"
+  label: Image repository
+  type: string
+  group: "Container Images"
+- variable: image.pullPolicy
+  default: IfNotPresent
+  description: "image.pullPolicy"
+  label: Image pullPolicy
+  type: string
+  group: "Container Images"
+
+# name
+- variable: nameOverride
+  default: ""
+  description: "nameOverride"
+  label: Name Override
+  type: string
+  group: "Name"
+- variable: fullnameOverride
+  default: ""
+  description: "fullnameOverride"
+  label: Fullname Override
+  type: string
+  group: "Name"
+
+# service
+
+- variable: service.type
+  default: "ClusterIP"
+  description: "service.type"
+  label: Service Type
+  type: string
+  group: "Service"
+- variable: service.port
+  default: "80"
+  description: "service.port"
+  label: Service Port
+  type: string
+  group: "Service"
+  
+  
