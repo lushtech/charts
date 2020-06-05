@@ -94,7 +94,7 @@ questions:
     type: hostname
     required: true
     label: Ingress hosts host name
-  - variable: ingress.hosts[0].paths
+  - variable: ingress.hosts[0].paths[0]
     default: /
     description: "ingress.hosts.paths"
     type: string
