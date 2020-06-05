@@ -64,9 +64,66 @@ questions:
   group: "Service And Load Balancing"
 - variable: service.loadBalancerIP
   default: ""
-  description: "Load Balancer IP for the Magento Service"
+  description: "service.loadBalancerIP"
   type: string
   show_if: "service.type=LoadBalancer"
-  label: LoadBalancer IP of Magento Service  
+  label: LoadBalancer IP of Nginx Service
+  group: "Service And Load Balancing"
+
+  
+# Ingress
+- variable: ingress.enabled
+  default: false
+  description: "Expose app using Layer 7 Load Balancer - ingress"
+  type: boolean
+  label: Expose app using Layer 7 Load Balancer
+  show_subquestion_if: true
+  group: "Services And Load Balancing"
+  subquestions:
+  - variable: ingress.hosts.host
+    default: "xip.io"
+    description: "ingress.hosts.host"
+    type: hostname
+    required: true
+    label: Ingress hosts host name
+  - variable: ingress.hosts.paths
+    default: []
+    description: "ingress.hosts.paths"
+    type: string
+    label: Ingress Hosts Paths
+  - variable: ingress.tls
+    default: []
+    description: "ingress.tls"
+    type: string
+    label: Ingress Tls
+# Resources
+- variable: resourcesSetting
+  default: false
+  description: "resourcesSetting"
+  label: Show ResourcesSetting
+  type: boolean
+  show_subquestion_if: true
+  group: "Resources Setting"
+  subquestions:
+  - variable: resources.requests.cpu
+    default: "100m"
+    description: "resources.requests.cpu"
+    type: string
+    label: Resources  Request CPU
+  - variable: resources.requests.memory
+    default: "128Mi"
+    description: "resources.requests.memory"
+    type: string
+    label: Resources  Request Memory
+  - variable: resources.limits.cpu
+    default: "100m"
+    description: "resources.limits.cpu"
+    type: string
+    label: Resources Limits CPU
+  - variable: resources.limits.memory
+    default: "128Mi"
+    description: "resources.limits.memory"
+    type: string
+    label: Resources Limits Memory
   
   
