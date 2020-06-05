@@ -36,6 +36,12 @@ service:
   type: ClusterIP
   port: 80
 
+  nodePorts:
+    http: ""
+    https: ""
+  externalTrafficPolicy: Cluster  
+
+
 ingress:
   enabled: false
   annotations: {}
