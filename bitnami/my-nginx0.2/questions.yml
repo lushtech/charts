@@ -28,19 +28,40 @@ questions:
   type: string
   group: "Name"
 
-# service
+# service and load balancing
 
 - variable: service.type
   default: "ClusterIP"
   description: "service.type"
   label: Service Type
-  type: string
-  group: "Service"
-- variable: service.port
-  default: "80"
-  description: "service.port"
-  label: Service Port
-  type: string
-  group: "Service"
+  type: enum
+  options:
+       - "ClusterIP"
+       - "NodePort"
+       - "LoadBalancer"
+  required: true
+  group: "Service And Load Balancing"
+  show_subquestion_if: "NodePort"
+  subquestions:
+  - variable: service.nodePorts.http
+    default: ""
+    description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
+    type: int
+    min: 30000
+    max: 32767
+    show_if: "service.type=NodePort"
+    label: NodePort Http Port        
+  - variable: service.port
+    default: "80"
+    description: "service.port"
+    label: Service Port
+    type: string
+    show_if: "service.type=ClusterIP"
+  - variable: service.loadBalancerIP
+    default: ""
+    description: "Load Balancer IP for the Magento Service"
+    type: string
+    show_if: "service.type=LoadBalancer"
+    label: LoadBalancer IP of Magento Service  
   
   
