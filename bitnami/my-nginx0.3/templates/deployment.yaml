@@ -48,7 +48,7 @@ spec:
       - name: nginx-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "nginx.fullname" . }}
+          claimName: {{ template "my-nginx.fullname" . }}
       {{- else }}
         emptyDir: {}
       {{- end }}      
