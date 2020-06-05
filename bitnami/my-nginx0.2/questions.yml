@@ -51,17 +51,18 @@ questions:
     max: 32767
     show_if: "service.type=NodePort"
     label: NodePort Http Port        
-  - variable: service.port
-    default: "80"
-    description: "service.port"
-    label: Service Port
-    type: string
-    show_if: "service.type=ClusterIP"
-  - variable: service.loadBalancerIP
-    default: ""
-    description: "Load Balancer IP for the Magento Service"
-    type: string
-    show_if: "service.type=LoadBalancer"
-    label: LoadBalancer IP of Magento Service  
+- variable: service.port
+  default: "80"
+  description: "service.port"
+  label: Service Port
+  type: string
+  show_if: "service.type=ClusterIP"
+  group: "Service And Load Balancing"
+- variable: service.loadBalancerIP
+  default: ""
+  description: "Load Balancer IP for the Magento Service"
+  type: string
+  show_if: "service.type=LoadBalancer"
+  label: LoadBalancer IP of Magento Service  
   
   
