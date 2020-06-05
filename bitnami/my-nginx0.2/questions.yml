@@ -69,6 +69,14 @@ questions:
   show_if: "service.type=LoadBalancer"
   label: LoadBalancer IP of Nginx Service
   group: "Service And Load Balancing"
+- variable: service.externalTrafficPolicy
+  default: "Cluster"
+  description: "service.externalTrafficPolicy"
+  type: string
+  show_if: "service.type=LoadBalancer || service.type=NodePort"
+  label: service external TrafficPolicy
+  group: "Service And Load Balancing"
+  
 
   
 # Ingress
