@@ -88,13 +88,13 @@ questions:
   show_subquestion_if: true
   group: "Services And Load Balancing"
   subquestions:
-  - variable: ingress.hosts.host
+  - variable: ingress.hosts[0].host
     default: "xip.io"
     description: "ingress.hosts.host"
     type: hostname
     required: true
     label: Ingress hosts host name
-  - variable: ingress.hosts.paths
+  - variable: ingress.hosts[0].paths
     default: /
     description: "ingress.hosts.paths"
     type: string
