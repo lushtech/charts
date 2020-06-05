@@ -11,7 +11,11 @@ questions:
   default: IfNotPresent
   description: "image.pullPolicy"
   label: Image pullPolicy
-  type: string
+  type: enum
+  options:
+      - "IfNotPresent"
+      - "Always"
+      - "Never"  
   group: "Container Images"
 
 # name
