@@ -144,6 +144,16 @@ questions:
   show_subquestion_if: true
   group: "Persistence Settings"
   subquestions:
+  - variable: persistence.nginx.accessMode
+    default: "ReadWriteOnce"
+    description: "persistence.nginx.accessMode"
+    type: enum
+    options:
+        - "ReadWriteOnce"
+        - "ReadOnlyMany"
+        - "ReadWriteMany"  
+    required: true
+    label: Persistence Nginx AccessMode        
   - variable: persistence.nginx.size
     default: "20Mi"
     description: "Persistent volume size"
