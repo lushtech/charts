@@ -180,6 +180,7 @@ questions:
     default: |-
       server {              
          listen 0.0.0.0:80;
+         server_name v04.nginx.lushatech.cn;
          location / {
          root /usr/share/nginx/html;
          index index.html index.htm;
