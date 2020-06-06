@@ -45,10 +45,10 @@ spec:
           - name: nginx-data
             mountPath: /usr/share/nginx/html/test
           - name: nginx-server-block-paths
-              mountPath: /opt/bitnami/nginx/conf/server_blocks
+            mountPath: /opt/bitnami/nginx/conf/server_blocks
             {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
           - name: nginx-server-block
-              mountPath: /opt/bitnami/nginx/conf/server_blocks/common
+            mountPath: /opt/bitnami/nginx/conf/server_blocks/common
             {{- end }}  
       volumes:
       - name: nginx-data
@@ -59,19 +59,19 @@ spec:
         emptyDir: {}
       {{- end }}
       - name: nginx-server-block-paths
-          configMap:
+        configMap:
             name: {{ template "my-nginx.fullname" . }}-server-block
             items:
-              - key: server-blocks-paths.conf
-                path: server-blocks-paths.conf
+            - key: server-blocks-paths.conf
+              path: server-blocks-paths.conf
         {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
       - name: nginx-server-block
-          configMap:
+        configMap:
             name: {{ include "nginx.serverBlockConfigmapName" . }}
             {{- if or .Values.serverBlock }}
             items:
-              - key: server-block.conf
-                path: server-block.conf
+            - key: server-block.conf
+              path: server-block.conf
             {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
