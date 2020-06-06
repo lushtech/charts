@@ -180,9 +180,6 @@ questions:
     default: |-
       server {
          listen 0.0.0.0:80;
-         location / {
-         index index.html index.php;
-         }
          location /test {
          return 200 "hello world version 0.4";
          }
