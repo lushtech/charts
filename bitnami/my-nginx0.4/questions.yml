@@ -179,7 +179,7 @@ questions:
   - variable: serverBlock
     default: |-
       server {              
-         listen 0.0.0.0:80;       
+         listen 80;       
          location / {
          root /usr/share/nginx/html;
          index index.html index.htm;
