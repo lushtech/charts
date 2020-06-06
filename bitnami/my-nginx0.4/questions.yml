@@ -195,7 +195,7 @@ questions:
     type: multiline
     label: Server Block
   - variable: existingServerBlockConfigmap
-    default: "existingServerBlockConfigmap，if set，will override serverBlock"
+    default: ""
     description: "existingServerBlockConfigmap，if set，will override serverBlock"
     type: string
     label: Existing  ServerBlock Configmap
