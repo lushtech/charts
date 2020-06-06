@@ -35,3 +35,15 @@ helm create my-nginx
   > 如果`existingServerBlockConfigmap` 有设置，那代表读取已经存在的configmap，这会override上面创建的configMap
   >
   > 2：修改deployment.yaml文件，挂载这个configmap。
+  >
+  > 挂载的时候使用subPath，挂在server-blocks-paths.conf到/etc/nginx/conf.d文件夹下，原有的default.conf不变
+  >
+  > ```
+  >  volumeMounts:
+  >           - name: nginx-server-block-paths
+  >             mountPath: /etc/nginx/conf.d/server-blocks-paths.conf
+  >             subPath: server-blocks-paths.conf
+  > 
+  > ```
+  >
+  > 
