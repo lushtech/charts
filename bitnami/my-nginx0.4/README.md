@@ -32,4 +32,6 @@ helm create my-nginx
   >
   > 它创建了一个data对象，包含server-blocks-paths.conf，server-block.conf
   >
-  > 
+  > 如果`existingServerBlockConfigmap` 有设置，那代表读取已经存在的configmap，这会override上面创建的configMap
+  >
+  > 2：修改deployment.yaml文件，挂载这个configmap。
