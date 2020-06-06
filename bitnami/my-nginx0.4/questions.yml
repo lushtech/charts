@@ -178,8 +178,12 @@ questions:
   subquestions:
   - variable: serverBlock
     default: |-
-      server {
+      server {              
          listen 0.0.0.0:80;
+         localtion / {
+         root /usr/share/nginx/html;
+         index index.html index.htm;
+         }
          location /test {
          return 200 "hello world version 0.4";
          }
