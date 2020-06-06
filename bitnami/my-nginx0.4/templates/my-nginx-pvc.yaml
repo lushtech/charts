@@ -1,0 +1,25 @@
+{{- if .Values.persistence.enabled -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "my-nginx.fullname" . }}
+  labels:
+    app: {{ template "my-nginx.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  accessModes:
+    - {{ .Values.persistence.nginx.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.nginx.size | quote }}
+{{- if .Values.persistence.nginx.storageClass }}
+{{- if (eq "-" .Values.persistence.nginx.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.persistence.nginx.storageClass }}"
+{{- end }}
+{{- end }}
+{{- end -}}
+
