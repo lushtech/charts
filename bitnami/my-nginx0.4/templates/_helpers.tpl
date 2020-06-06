@@ -61,3 +61,15 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+
+{{/*
+Return the custom NGINX server block configmap.
+*/}}
+{{- define "nginx.serverBlockConfigmapName" -}}
+{{- if .Values.existingServerBlockConfigmap -}}
+    {{- printf "%s" (tpl .Values.existingServerBlockConfigmap $) -}}
+{{- else -}}
+    {{- printf "%s-server-block" (include "my-nginx.fullname" .) -}}
+{{- end -}}
+{{- end -}}

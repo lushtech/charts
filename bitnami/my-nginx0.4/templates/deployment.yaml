@@ -43,7 +43,13 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
           - name: nginx-data
-            mountPath: /usr/share/nginx/html/test  
+            mountPath: /usr/share/nginx/html/test
+          - name: nginx-server-block-paths
+              mountPath: /opt/bitnami/nginx/conf/server_blocks
+            {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
+          - name: nginx-server-block
+              mountPath: /opt/bitnami/nginx/conf/server_blocks/common
+            {{- end }}  
       volumes:
       - name: nginx-data
       {{- if .Values.persistence.enabled }}
@@ -51,7 +57,23 @@ spec:
           claimName: {{ template "my-nginx.fullname" . }}
       {{- else }}
         emptyDir: {}
-      {{- end }}      
+      {{- end }}
+      - name: nginx-server-block-paths
+          configMap:
+            name: {{ template "my-nginx.fullname" . }}-server-block
+            items:
+              - key: server-blocks-paths.conf
+                path: server-blocks-paths.conf
+        {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
+      - name: nginx-server-block
+          configMap:
+            name: {{ include "nginx.serverBlockConfigmapName" . }}
+            {{- if or .Values.serverBlock }}
+            items:
+              - key: server-block.conf
+                path: server-block.conf
+            {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
