@@ -187,12 +187,6 @@ questions:
          location /test {
          return 200 "hello world version 0.4";
          }
-
-         location ~ \.php$ {
-         fastcgi_pass phpfpm-server:9000;
-         fastcgi_index index.php;
-         include fastcgi.conf;
-         }
       }   
 
     description: "serverBlock"
