@@ -1,0 +1,237 @@
+categories:
+- Nginx
+questions:
+- variable: image.repository
+  default: nginx
+  description: "image.repository"
+  label: Image repository
+  type: string
+  group: "Container Images"
+- variable: image.pullPolicy
+  default: IfNotPresent
+  description: "image.pullPolicy"
+  label: Image pullPolicy
+  type: enum
+  options:
+      - "IfNotPresent"
+      - "Always"
+      - "Never"  
+  group: "Container Images"
+
+# name
+- variable: nameOverride
+  default: ""
+  description: "nameOverride"
+  label: Name Override
+  type: string
+  group: "Name"
+- variable: fullnameOverride
+  default: ""
+  description: "fullnameOverride"
+  label: Fullname Override
+  type: string
+  group: "Name"
+
+# service and load balancing
+
+- variable: service.type
+  default: "ClusterIP"
+  description: "service.type"
+  label: Service Type
+  type: enum
+  options:
+       - "ClusterIP"
+       - "NodePort"
+       - "LoadBalancer"
+  required: true
+  group: "Service And Load Balancing"
+  show_subquestion_if: "NodePort"
+  subquestions:
+  - variable: service.nodePorts.http
+    default: ""
+    description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
+    type: int
+    min: 30000
+    max: 32767
+    show_if: "service.type=NodePort"
+    label: NodePort Http Port        
+- variable: service.port
+  default: "80"
+  description: "service.port"
+  label: Service Port
+  type: string
+  show_if: "service.type=ClusterIP"
+  group: "Service And Load Balancing"
+- variable: service.loadBalancerIP
+  default: ""
+  description: "service.loadBalancerIP"
+  type: string
+  show_if: "service.type=LoadBalancer"
+  label: LoadBalancer IP of Nginx Service
+  group: "Service And Load Balancing"
+- variable: service.externalTrafficPolicy
+  default: "Cluster"
+  description: "service.externalTrafficPolicy"
+  type: string
+  show_if: "service.type=LoadBalancer || service.type=NodePort"
+  label: service external TrafficPolicy
+  group: "Service And Load Balancing"
+  
+
+  
+# Ingress
+- variable: ingress.enabled
+  default: false
+  description: "Expose app using Layer 7 Load Balancer - ingress"
+  type: boolean
+  label: Expose app using Layer 7 Load Balancer
+  show_subquestion_if: true
+  group: "Service And Load Balancing"
+  subquestions:
+  - variable: ingress.hosts[0].host
+    default: "xip.io"
+    description: "ingress.hosts.host"
+    type: hostname
+    required: true
+    label: Ingress hosts host name
+  - variable: ingress.hosts[0].paths[0]
+    default: /
+    description: "ingress.hosts.paths"
+    type: string
+    label: Ingress Hosts Paths
+  - variable: ingress.tls
+    default: []
+    description: "ingress.tls"
+    type: string
+    label: Ingress Tls
+# Resources
+- variable: resourcesSetting
+  default: false
+  description: "resourcesSetting"
+  label: Show ResourcesSetting
+  type: boolean
+  show_subquestion_if: true
+  group: "Resources Setting"
+  subquestions:
+  - variable: resources.requests.cpu
+    default: "100m"
+    description: "resources.requests.cpu"
+    type: string
+    label: Resources  Request CPU
+  - variable: resources.requests.memory
+    default: "128Mi"
+    description: "resources.requests.memory"
+    type: string
+    label: Resources  Request Memory
+  - variable: resources.limits.cpu
+    default: "100m"
+    description: "resources.limits.cpu"
+    type: string
+    label: Resources Limits CPU
+  - variable: resources.limits.memory
+    default: "128Mi"
+    description: "resources.limits.memory"
+    type: string
+    label: Resources Limits Memory
+  
+# Persistence
+- variable: persistence.enabled
+  default: false
+  description: "Enable persistence volume for nginx"
+  type: boolean
+  required: true
+  label: nginx Persistent Volume Enabled
+  show_subquestion_if: true
+  group: "Persistence Settings"
+  subquestions:
+  - variable: persistence.nginx.accessMode
+    default: "ReadWriteOnce"
+    description: "persistence.nginx.accessMode"
+    type: enum
+    options:
+        - "ReadWriteOnce"
+        - "ReadOnlyMany"
+        - "ReadWriteMany"  
+    required: true
+    label: Persistence Nginx AccessMode        
+  - variable: persistence.nginx.size
+    default: "20Mi"
+    description: "Persistent volume size"
+    type: string
+    required: true
+    label: Nginx Persistent Volume Size
+  - variable: persistence.nginx.storageClass
+    default: ""
+    description: "If undefined or set to null, using the default StorageClass. Defaults to null."
+    type: storageclass
+    label: Storage Class for nginx
+
+
+# serverBlock
+- variable: serverBlockSetting
+  default: false
+  description: "serverBlockSetting"
+  label: Show serverBlockSetting
+  type: boolean
+  show_subquestion_if: true
+  group: "Server Block Setting"
+  subquestions:
+  - variable: serverBlock
+    default: |-
+      server {              
+         listen 80;
+         server_name localhost;
+         location /test1 {
+              root /usr/share/nginx/html;
+              index index.html index.htm;
+         }
+         location /test {
+              return 200 "hello world version 0.4";
+         }
+      }   
+
+    description: "serverBlock"
+    type: multiline
+    label: Server Block
+  - variable: existingServerBlockConfigmap
+    default: ""
+    description: "existingServerBlockConfigmap，if set，will override serverBlock"
+    type: string
+    label: Existing  ServerBlock Configmap
+
+# staticSiteConfigmap, staticSitePVC, Clone Static Site
+
+- variable: cloneStaticSiteFromGit.enabled
+  default: false
+  description: "Clone static site from git"
+  label: Clone Static Site From Git
+  type: boolean
+  show_subquestion_if: true
+  group: "Copy Static Site From Git"
+  subquestions:
+  - variable: cloneStaticSiteFromGit.image.repository
+    default: bitnami/git
+    type: string
+    description: "Bitnami git image name"
+    label: Bitnami Git Image Name
+  - variable: cloneStaticSiteFromGit.image.tag
+    default: 2.26.2-debian-10-r30
+    type: string
+    description: "Bitnami git image tag"
+    label: Bitnami Git Image Tag
+  - variable: cloneStaticSiteFromGit.repository
+    default: https://github.com/mdn/beginner-html-site-styled.git
+    type: string
+    description: "The git repo of the static site"
+    label: "The Git Repo of the Static Site"  
+  - variable: cloneStaticSiteFromGit.branch
+    default: master
+    type: string
+    description: "The branch of the git repo"
+    label: "The Branch  of the Git repo"
+  - variable: cloneStaticSiteFromGit.interval
+    default: 60
+    type: string
+    description: "Interval for sidecar container pull from the repository"
+    label: "The Interval pull from github repo "
+
