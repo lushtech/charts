@@ -67,5 +67,8 @@ helm create my-nginx
   >
   > 
   >
-  > 
-  >
+
+调试了半天，总是报错：“error: error converting YAML to JSON: yaml: line 15: did not find expected key，“ mapping values are not allowed in this context”，后来发现主要是由于空格和对齐问题引起的。
+
+此外需要注意的是，报错的行号，是表示转换后的yaml文件的行数，不是转换前的。所以在根据报错行数找原始文件中的行数时，往往不是同一个行，可能推前也可能推后。
+
