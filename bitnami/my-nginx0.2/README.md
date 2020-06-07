@@ -9,3 +9,4 @@ helm create my-nginx
 
 * 增加questions.yml
 * 修改service type 为可选三种类型
+* 配置ingress

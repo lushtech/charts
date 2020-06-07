@@ -18,5 +18,9 @@ helm create my-nginx
 
    目的：挂载一个卷到nginx容器的启动目录。
 
-  增加一个pvc模板，my-nginx-pvc.yaml
+  > 1: 增加一个pvc模板，my-nginx-pvc.yaml
+  >
+  > 2: 在deployment.yaml中claim volumes以及挂载volumes
+  >
+  > 这里将卷挂载在容器的/usr/share/nginx/html/test目录下
 
