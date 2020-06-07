@@ -82,8 +82,8 @@ spec:
             mountPath: /opt/bitnami/nginx/conf/server_blocks/common
             {{- end }}
             {{- if (include "nginx.useStaticSite" .) }}
-          - name: staticsite
-            mountPath: /usr/share/nginx/html
+#          - name: staticsite
+#            mountPath: /usr/share/nginx/html
             {{- end }}
       volumes:
       - name: nginx-data
