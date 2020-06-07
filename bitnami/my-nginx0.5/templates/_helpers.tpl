@@ -101,7 +101,13 @@ persistentVolumeClaim:
 {{- end -}}
 
 
-
+{{/*
+Return the proper Git image name
+*/}}
+{{- define "cloneStaticSiteFromGit.image" -}}
+{{- $registryName := .Values.cloneStaticSiteFromGit.image.registry -}}
+{{- $repositoryName := .Values.cloneStaticSiteFromGit.image.repository -}}
+{{- $tag := .Values.cloneStaticSiteFromGit.image.tag | toString -}}
 
 
 
