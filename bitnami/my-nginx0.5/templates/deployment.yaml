@@ -85,9 +85,6 @@ spec:
           - name: staticsite
             mountPath: /usr/share/nginx/html
           {{- end }}
-          {{- if .Values.extraVolumeMounts }}
-          {{- include "nginx.tplValue" ( dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
-          {{- end }}  
       volumes:
       - name: nginx-data
       {{- if .Values.persistence.enabled }}
