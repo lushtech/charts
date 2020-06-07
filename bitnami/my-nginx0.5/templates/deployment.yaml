@@ -82,8 +82,8 @@ spec:
             mountPath: /opt/bitnami/nginx/conf/server_blocks/common
             {{- end }}
             {{- if (include "nginx.useStaticSite" .) }}
-#          - name: staticsite
-#            mountPath: /usr/share/nginx/html
+          - name: staticsite
+            mountPath: /usr/share/nginx/html
             {{- end }}
       volumes:
       - name: nginx-data
@@ -111,8 +111,8 @@ spec:
             {{- end }}
         {{- end }}
         {{- if (include "nginx.useStaticSite" .) }}
-        - name: staticsite
-          {{- include "nginx.staticSiteVolume" . | nindent 10 }}
+      - name: staticsite
+        {{- include "nginx.staticSiteVolume" . | nindent 10 }}
         {{- end }}
       {{- if .Values.extraVolumes }}
       {{- include "nginx.tplValue" ( dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
