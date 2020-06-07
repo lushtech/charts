@@ -229,6 +229,15 @@ questions:
     type: string
     description: "The branch of the git repo"
     label: "The Branch  of the Git repo"
+  - variable: cloneStaticSiteFromGit.image.pullPolicy
+    default: IfNotPresent
+    description: "cloneStaticSiteFromGit.image.pullPolicy"
+    label: Image pullPolicy
+    type: enum
+    options:
+      - "IfNotPresent"
+      - "Always"
+      - "Never"  
   - variable: cloneStaticSiteFromGit.interval
     default: 60
     type: string
