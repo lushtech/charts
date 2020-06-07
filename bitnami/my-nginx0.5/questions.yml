@@ -209,11 +209,16 @@ questions:
   show_subquestion_if: true
   group: "Copy Static Site From Git"
   subquestions:
+  - variable: cloneStaticSiteFromGit.image.registry
+    default: docker.io
+    type: string
+    description: "Bitnami git image registry"
+    label: Bitnami Git Image registry      
   - variable: cloneStaticSiteFromGit.image.repository
     default: bitnami/git
     type: string
-    description: "Bitnami git image name"
-    label: Bitnami Git Image Name
+    description: "Bitnami git image repository"
+    label: Bitnami Git Image repository
   - variable: cloneStaticSiteFromGit.image.tag
     default: 2.26.2-debian-10-r30
     type: string
