@@ -52,7 +52,7 @@ spec:
       {{- else }}        
       containers:
       {{- end }}
-        - name: {{ .chart.Name }}-phpfpm
+        - name: {{ .Chart.Name }}-phpfpm
           image: php:7.4.6-fpm
           imagePullPolicy: IfNotPresent
           securityContext:
