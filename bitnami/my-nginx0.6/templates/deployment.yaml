@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-nginx.fullname" . }}
+  labels:
+    {{- include "my-nginx.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "my-nginx.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "my-nginx.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "my-nginx.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.cloneStaticSiteFromGit.enabled }}  
+      initContainers:
+        - name: git-clone-repository
+          image: {{ include "cloneStaticSiteFromGit.image" . }}
+          imagePullPolicy: {{ .Values.cloneStaticSiteFromGit.image.pullPolicy | quote }}
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              git clone {{ .Values.cloneStaticSiteFromGit.repository }} --branch {{ .Values.cloneStaticSiteFromGit.branch }} /app
+          volumeMounts:
+            - name: staticsite
+              mountPath: /app
+      containers:
+        - name: git-repo-syncer
+          image: {{ include "cloneStaticSiteFromGit.image" . }}
+          imagePullPolicy: {{ .Values.cloneStaticSiteFromGit.image.pullPolicy | quote }}
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              while true; do
+                  cd /app && git pull origin {{ .Values.cloneStaticSiteFromGit.branch }}
+                  sleep {{ .Values.cloneStaticSiteFromGit.interval }}
+              done
+          volumeMounts:
+            - name: staticsite
+              mountPath: /app
+      {{- else }}        
+      containers:
+      {{- end }}        
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- if .Values.livenessProbe }}    
+          livenessProbe: {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe: {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}  
+          volumeMounts:
+          - name: nginx-data
+            mountPath: /usr/share/nginx/html/test
+          - name: nginx-server-block-paths
+            mountPath: /etc/nginx/conf.d/server-blocks-paths.conf
+            subPath: server-blocks-paths.conf
+            {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
+          - name: nginx-server-block
+            mountPath: /opt/bitnami/nginx/conf/server_blocks/common
+            {{- end }}
+            {{- if (include "nginx.useStaticSite" .) }}
+          - name: staticsite
+            mountPath: /usr/share/nginx/html
+            {{- end }}
+      volumes:
+      - name: nginx-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "my-nginx.fullname" . }}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: nginx-server-block-paths
+        configMap:
+            name: {{ template "my-nginx.fullname" . }}-server-block
+            items:
+            - key: server-blocks-paths.conf
+              path: server-blocks-paths.conf
+      {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap (include "nginx.useStaticSite" .) }}        
+        {{- if or .Values.serverBlock .Values.existingServerBlockConfigmap }}
+      - name: nginx-server-block
+        configMap:
+            name: {{ include "nginx.serverBlockConfigmapName" . }}
+            {{- if or .Values.serverBlock }}
+            items:
+            - key: server-block.conf
+              path: server-block.conf
+            {{- end }}
+        {{- end }}
+        {{- if (include "nginx.useStaticSite" .) }}
+      - name: staticsite
+        {{- include "nginx.staticSiteVolume" . | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
