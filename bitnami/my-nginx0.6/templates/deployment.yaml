@@ -51,7 +51,17 @@ spec:
               mountPath: /app
       {{- else }}        
       containers:
-      {{- end }}        
+      {{- end }}
+        - name: {{ .chart.Name }}-phpfpm
+          image: php:7.4.6-fpm
+          imagePullPolicy: IfNotPresent
+          securityContext:
+                  privileged: true
+          ports:
+              - containerPort: 9000 
+          volumeMounts:
+              - name: staticsite
+                mountPath: /var/www/html      
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}

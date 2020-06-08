@@ -78,3 +78,34 @@ helm create my-nginx
 
 相关概念，参考此文[kubernetes系列之八：Kubernetes的liveness和readiness探测](https://blog.csdn.net/cloudvtech/article/details/80216116?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase)
 
+这里建了一个来检测nginx容器的健康
+
+* 用启动一个php容器，和nginx配置使用。挂载一个php网站。
+
+  php的镜像，选用php官方的php:[7.4.6-fpm](https://hub.docker.com/layers/php/library/php/7.4.6-fpm/images/sha256-42313e7eb1eb0e018de000c76cd6d35dc82f0f4879c0dff3f37fd6640a4d858e?context=explore)版本
+
+  * 在deployment.yml中增加php的内容。
+
+  * 因为nginx和phpfpm在同一个pod里面，所以无需暴露服务
+
+  *   增加nginx中的关于php的配置。
+
+    ```
+     server {
+        listen 0.0.0.0:80;
+        root /app;
+         location / {
+           index index.html index.php;
+          }
+         location ~ \.php$ {
+            fastcgi_pass phpfpm-server:9000;
+            fastcgi_index index.php;
+           include fastcgi.conf;
+         }
+       }
+    ```
+
+    phpfpm-server用容器名代替，这里是my-nginx-phpfpm
+
+  
+    
