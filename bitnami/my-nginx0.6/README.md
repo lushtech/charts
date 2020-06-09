@@ -93,19 +93,22 @@ helm create my-nginx
     ```
      server {
         listen 0.0.0.0:80;
-        root /app;
+        
          location / {
+           root   /usr/share/nginx/html;
            index index.html index.php;
           }
          location ~ \.php$ {
-            fastcgi_pass phpfpm-server:9000;
+            root /var/www/html;
+            fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
-           include fastcgi.conf;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
          }
        }
     ```
 
     phpfpm-server用容器名代替，这里是my-nginx-phpfpm
 
-  
+  用这个php网站代码来做测试，https://github.com/phhpro/atomchat.git，因为它不需要链接数据库。
     
