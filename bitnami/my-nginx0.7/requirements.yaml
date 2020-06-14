@@ -1,0 +1,6 @@
+dependencies:
+- name: mysql
+  version: "0.19.2"
+  appVersion: 5.7.14
+  repository: "file://./charts/mysql"
+  condition: db.enabled
