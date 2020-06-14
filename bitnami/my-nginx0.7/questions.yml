@@ -332,17 +332,31 @@ questions:
     type: string
     description: "mysql.service.nodePort"
     label: Mysql Service nodePort
-  - variable: mysql.persistence.size
-    default: "4Gi"
-    type: string
-    description: "mysql.persistence.size"
-    label: Mysql Persistence Size
   - variable: mysql.imageTag
     default: "5.7.22"
     type: string
     description: "mysql.imageTag"
     label: Mysql ImageTag
- 
+## DB persistence 
+- variable: mysql.persistence.enabled
+  default: true
+  description: "mysql.persistence.enabled"
+  label: Mysql Persistence Enabled
+  type: boolean
+  show_subquestion_if: true
+  group: "Db setting"
+  subquestions:
+  - variable: mysql.persistence.accessMode
+    default: ReadWriteOnce
+    type: string
+    description: "mysql.persistence.accessMode"
+    label: Mysql Persistence AccessMode
+  - variable: mysql.persistence.size
+    default: "4Gi"
+    type: string
+    description: "mysql.persistence.size"
+    label: Mysql Persistence Size
+
   
           
 
